@@ -27,6 +27,14 @@
           $("div").show();
         });
       });
+
+      //toggle 
+      // just use .toggle() method to toggle between hide and show
+        $(document).ready(function () {
+            $("#toggle").click(function () {
+            $("div").toggle();
+            });
+        });
     </script>
   </head>
   <body>
@@ -34,7 +42,7 @@
     <div>This is going to hide when button click</div>
     <button>Click me for hide</button>
     <button id="show">Click me for show</button>
-
+    <button id="toggle">Click me for toggle</button>
     <div class="hide">This is going to hide when clicked</div>
   </body>
 </html>
