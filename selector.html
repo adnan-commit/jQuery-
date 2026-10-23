@@ -13,11 +13,19 @@
       });
 
       //same works for id and class also just add # id and . for class
+
+      //self hide
+      $(document).ready(function(){
+        $(".hide").click(function(){
+            $(this).hide();
+        });
+      });
     </script>
   </head>
   <body>
     <h1>Selector</h1>
     <div>This is going to hide when button click</div>
     <button>Click me</button>
+    <div class="hide">This is going to hide when clicked</div>
   </body>
 </html>
