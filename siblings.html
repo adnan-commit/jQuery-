@@ -1,0 +1,153 @@
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>jQuery Traversal Methods</title>
+
+    <!-- CSS -->
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+      }
+
+      .container {
+        width: 350px;
+        margin-bottom: 20px;
+      }
+
+      .item {
+        padding: 12px;
+        margin: 5px 0;
+        background-color: lightgray;
+        border: 1px solid black;
+      }
+
+      /* Selected element */
+      .active {
+        background-color: orange;
+      }
+
+      /* Elements selected by jQuery */
+      .highlight {
+        background-color: lightgreen;
+      }
+
+      button {
+        margin: 5px;
+        padding: 8px 12px;
+        cursor: pointer;
+      }
+    </style>
+
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
+
+    <!-- jQuery Code -->
+    <script>
+      $(document).ready(function () {
+        // siblings()
+        // Returns all siblings of the selected element,
+        // excluding the selected element itself.
+        $("#siblings").click(function () {
+          reset();
+          $(".active").siblings().addClass("highlight");
+        });
+
+        // next()
+        // Returns the immediately following sibling.
+        $("#next").click(function () {
+          reset();
+          $(".active").next().addClass("highlight");
+        });
+
+        // nextAll()
+        // Returns all following siblings.
+        $("#nextAll").click(function () {
+          reset();
+          $(".active").nextAll().addClass("highlight");
+        });
+
+        // nextUntil()
+        // Returns all following siblings until the specified element.
+        // The specified stopping element is excluded.
+        $("#nextUntil").click(function () {
+          reset();
+          $(".active").nextUntil(".stop").addClass("highlight");
+        });
+
+        // prev()
+        // Returns the immediately preceding sibling.
+        $("#prev").click(function () {
+          reset();
+          $(".active").prev().addClass("highlight");
+        });
+
+        // prevAll()
+        // Returns all preceding siblings.
+        $("#prevAll").click(function () {
+          reset();
+          $(".active").prevAll().addClass("highlight");
+        });
+
+        // prevUntil()
+        // Returns all preceding siblings until the specified element.
+        // The specified stopping element is excluded.
+        $("#prevUntil").click(function () {
+          reset();
+          $(".active").prevUntil(".stop").addClass("highlight");
+        });
+
+        // Reset previous highlights before each demonstration.
+        function reset() {
+          $(".item").removeClass("highlight");
+        }
+      });
+    </script>
+  </head>
+
+  <body>
+    <h1>jQuery Traversal Methods</h1>
+
+    <p>Click the buttons to see how jQuery selects sibling elements.</p>
+
+    <!-- HTML Elements -->
+    <div class="container">
+      <div class="item">Item 1</div>
+
+      <div class="item stop">Item 2 (Stop Element)</div>
+
+      <div class="item">Item 3</div>
+
+      <div class="item active">Item 4 (Selected Element)</div>
+
+      <div class="item">Item 5</div>
+
+      <div class="item">Item 6</div>
+
+      <div class="item stop">Item 7 (Stop Element)</div>
+
+      <div class="item">Item 8</div>
+    </div>
+
+    <!-- Buttons -->
+    <h2>Methods</h2>
+
+    <button id="siblings">siblings()</button>
+
+    <button id="next">next()</button>
+
+    <button id="nextAll">nextAll()</button>
+
+    <button id="nextUntil">nextUntil()</button>
+
+    <button id="prev">prev()</button>
+
+    <button id="prevAll">prevAll()</button>
+
+    <button id="prevUntil">prevUntil()</button>
+  </body>
+</html>

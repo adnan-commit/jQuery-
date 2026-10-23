@@ -1,47 +1,138 @@
-<!DOCTYPE html>
+```html
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>jQuery Animation Methods</title>
+
+    <!-- CSS -->
     <style>
-        .ancestors {
-            width: 100px;
-            height: 100px;
-            background-color: red;
-            position: relative;
-        }
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+      }
+
+      .box {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+        position: relative;
+        margin: 20px 0;
+      }
+
+      button {
+        padding: 8px 12px;
+        margin: 5px;
+        cursor: pointer;
+      }
     </style>
 
-        <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
 
-        <script>
-            $(document).ready(function () {
-                $("span").click(function () {
-                    alert($("span").parents().length);
-                });
-            });
+    <!-- jQuery Code -->
+    <script>
+      $(document).ready(function () {
+        // animate()
+        // Performs custom animations by changing CSS properties.
+        $("#animate").click(function () {
+          $(".box").animate(
+            {
+              left: "250px",
+              opacity: 0.5,
+            },
+            1000,
+          );
+        });
 
-            // The parents() method returns all ancestor elements of the selected element, up to the document's root element. It does not include the selected element itself. The ancestors are returned in order from the closest ancestor to the furthest ancestor.
+        // animate() with multiple CSS properties
+        $("#multiple").click(function () {
+          $(".box").animate(
+            {
+              left: "100px",
+              top: "50px",
+              width: "200px",
+              height: "150px",
+              opacity: 0.7,
+            },
+            1000,
+          );
+        });
 
-            //parent() method returns the immediate parent element of the selected element. It only returns one level up in the DOM tree, whereas parents() returns all ancestor elements.
-            $("span").click(function () {
-                alert($("span").parent().length);
-            });
-            
-            // The parentsUntil() method returns all ancestor elements of the selected element, up to but not including the specified element. It allows you to specify a stopping point in the DOM tree, so you can retrieve ancestors up to a certain level.
-            $("span").click(function () {
-                alert($("span").parentsUntil("div").length);
-            });
-        </script>
+        // fadeOut()
+        // Gradually hides the selected element.
+        $("#fadeOut").click(function () {
+          $(".box").fadeOut(1000);
+        });
 
+        // fadeIn()
+        // Gradually displays a hidden element.
+        $("#fadeIn").click(function () {
+          $(".box").fadeIn(1000);
+        });
 
-</head>
-<body>
-    <!-- Ancestors example  -->
-     <div class="ancestors">
-        <span>Click me!</span>
+        // slideUp()
+        // Hides the element with an upward sliding effect.
+        $("#slideUp").click(function () {
+          $(".box").slideUp(1000);
+        });
 
-     </div>
-</body>
+        // slideDown()
+        // Displays the element with a downward sliding effect.
+        $("#slideDown").click(function () {
+          $(".box").slideDown(1000);
+        });
+
+        // stop()
+        // Stops the currently running animation.
+        $("#stop").click(function () {
+          $(".box").stop();
+        });
+
+        // Reset the box to its original state.
+        $("#reset").click(function () {
+          $(".box").stop(true, true);
+
+          $(".box").css({
+            left: "0px",
+            top: "0px",
+            width: "100px",
+            height: "100px",
+            opacity: 1,
+            display: "block",
+          });
+        });
+      });
+    </script>
+  </head>
+
+  <body>
+    <h1>jQuery Animation Methods</h1>
+
+    <p>Click the buttons to see different jQuery animations.</p>
+
+    <!-- HTML Element -->
+    <div class="box"></div>
+
+    <!-- Buttons -->
+    <h2>Animation Methods</h2>
+
+    <button id="animate">animate()</button>
+
+    <button id="multiple">Multiple Properties</button>
+
+    <button id="fadeOut">fadeOut()</button>
+
+    <button id="fadeIn">fadeIn()</button>
+
+    <button id="slideUp">slideUp()</button>
+
+    <button id="slideDown">slideDown()</button>
+
+    <button id="stop">stop()</button>
+
+    <button id="reset">Reset</button>
+  </body>
 </html>

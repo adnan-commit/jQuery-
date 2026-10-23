@@ -1,36 +1,29 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
-        div {
-            width: 100px;
-            height: 100px;
-            background-color: red;
-            position: relative;
-        }
+      div {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+        position: relative;
+      }
     </style>
     <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
     <script>
-        $(document).ready(function () {
-            $("#animate").click(function () {
-                $("div").animate({
-                    left: "250px",
-                    opacity: "0.5"
-                }, 1000);
-            });
+      $(document).ready(function () {
+        $("#animate").click(function () {
+          $("div").animate({ left: "250px", opacity: "0.5" }, 1000);
         });
+      });
     </script>
-
-</head>
-
-<body>
+  </head>
+  <body>
     <!-- elements to show animate in jquery -->
-
     <div>This div will get animated</div>
     <button id="animate">Click me for animate</button>
-
-</body>
+  </body>
 </html>

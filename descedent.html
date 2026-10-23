@@ -1,0 +1,126 @@
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>jQuery Descendant Methods</title>
+
+    <!-- CSS -->
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+      }
+
+      .parent {
+        padding: 15px;
+        margin: 15px 0;
+        border: 2px solid black;
+        background-color: lightgray;
+      }
+
+      .child {
+        padding: 12px;
+        margin: 10px;
+        border: 1px solid black;
+        background-color: lightblue;
+      }
+
+      .grandchild {
+        padding: 10px;
+        margin: 10px;
+        border: 1px solid black;
+        background-color: lightyellow;
+      }
+
+      .highlight {
+        background-color: lightgreen;
+      }
+
+      button {
+        padding: 8px 12px;
+        margin: 5px;
+        cursor: pointer;
+      }
+    </style>
+
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
+
+    <!-- jQuery Code -->
+    <script>
+      $(document).ready(function () {
+        // children()
+        // Selects all direct children of the selected element.
+        $("#children").click(function () {
+          reset();
+          $(".parent").children().addClass("highlight");
+        });
+
+        // children(selector)
+        // Selects direct children matching the specified selector.
+        $("#childrenFilter").click(function () {
+          reset();
+          $(".parent").children(".child").addClass("highlight");
+        });
+
+        // find()
+        // Selects all descendants at any depth.
+        $("#find").click(function () {
+          reset();
+          $(".parent").find("*").addClass("highlight");
+        });
+
+        // find(selector)
+        // Selects all descendants matching the specified selector.
+        $("#findGrandchild").click(function () {
+          reset();
+          $(".parent").find(".grandchild").addClass("highlight");
+        });
+
+        // Reset previous highlights.
+        function reset() {
+          $(".parent, .child, .grandchild").removeClass("highlight");
+        }
+      });
+    </script>
+  </head>
+
+  <body>
+    <h1>jQuery Descendant Methods</h1>
+
+    <p>
+      Click the buttons to see how jQuery selects child and descendant elements.
+    </p>
+
+    <!-- HTML Elements -->
+    <div class="parent">
+      Parent Element
+
+      <div class="child">
+        Child Element 1
+
+        <div class="grandchild">Grandchild Element 1</div>
+      </div>
+
+      <div class="child">
+        Child Element 2
+
+        <div class="grandchild">Grandchild Element 2</div>
+      </div>
+    </div>
+
+    <!-- Buttons -->
+    <h2>Methods</h2>
+
+    <button id="children">children()</button>
+
+    <button id="childrenFilter">children(".child")</button>
+
+    <button id="find">find("*")</button>
+
+    <button id="findGrandchild">find(".grandchild")</button>
+  </body>
+</html>
