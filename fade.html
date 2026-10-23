@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Document</title>
+    <style>
+      #div1,
+      #div2,
+      #div3 {
+        width: 200px;
+        height: 100px;
+        background-color: red;
+        margin: 10px;
+      }
+    </style>
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $("#fadeOut").click(function () {
+          $("#div1").fadeOut("slow");
+        });
+      });
+
+      $(document).ready(function () {
+        $("#fadeIn").click(function () {
+          $("#div2").fadeIn("fast");
+        });
+      });
+
+      $(document).ready(function () {
+        $("#fadeToggle").click(function () {
+          $("#div3").fadeToggle(4000);
+        });
+      });
+    </script>
+  </head>
+
+  <body>
+    <div id="div1">This is a simple div 1</div>
+    <div id="div2">This is a simple div 2</div>
+    <div id="div3">This is a simple div 3</div>
+
+    <button id="fadeOut">Click me for fadeOut</button>
+    <button id="fadeIn">Click me for fadeIn</button>
+    <button id="fadeToggle">Click me for fadeToggle</button>
+  </body>
+</html>
