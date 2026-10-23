@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .ancestors {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: relative;
+        }
+    </style>
+
+        <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
+
+        <script>
+            $(document).ready(function () {
+                $("span").click(function () {
+                    alert($("span").parents().length);
+                });
+            });
+
+            // The parents() method returns all ancestor elements of the selected element, up to the document's root element. It does not include the selected element itself. The ancestors are returned in order from the closest ancestor to the furthest ancestor.
+
+            //parent() method returns the immediate parent element of the selected element. It only returns one level up in the DOM tree, whereas parents() returns all ancestor elements.
+            $("span").click(function () {
+                alert($("span").parent().length);
+            });
+            
+            // The parentsUntil() method returns all ancestor elements of the selected element, up to but not including the specified element. It allows you to specify a stopping point in the DOM tree, so you can retrieve ancestors up to a certain level.
+            $("span").click(function () {
+                alert($("span").parentsUntil("div").length);
+            });
+        </script>
+
+
+</head>
+<body>
+    <!-- Ancestors example  -->
+     <div class="ancestors">
+        <span>Click me!</span>
+
+     </div>
+</body>
+</html>
