@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>jQuery Set Content</title>
+
+    <!-- CSS -->
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 500px;
+        padding: 15px;
+        border: 2px solid black;
+        margin-bottom: 20px;
+      }
+
+      .output {
+        padding: 10px;
+        margin-top: 10px;
+        background-color: lightyellow;
+        border: 1px solid gray;
+        overflow-wrap: anywhere;
+      }
+
+      input {
+        padding: 8px;
+        margin: 8px 0;
+      }
+
+      button {
+        padding: 8px 12px;
+        margin: 5px;
+        cursor: pointer;
+      }
+    </style>
+
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
+
+    <!-- jQuery Code -->
+    <script>
+      $(document).ready(function () {
+        // text()
+        // Sets plain text inside the selected element.
+        $("#setText").click(function () {
+          $("#textDemo").text("Hello Adnan! This is plain text.");
+        });
+
+        // html()
+        // Sets HTML content inside the selected element.
+        $("#setHtml").click(function () {
+          $("#htmlDemo").html(
+            "<strong>Hello Adnan!</strong> <em>This is HTML content.</em>",
+          );
+        });
+
+        // val()
+        // Sets the value of a form element.
+        $("#setVal").click(function () {
+          $("#name").val("Adnan Qureshi");
+          $("#email").val("adnan@example.com");
+        });
+
+        // Set all three types of content together.
+        $("#setAll").click(function () {
+          $("#textDemo").text("Text updated successfully!");
+
+          $("#htmlDemo").html(
+            "<h3>HTML Updated!</h3><p>This paragraph was created using <b>html()</b>.</p>",
+          );
+
+          $("#name").val("Adnan Qureshi");
+          $("#email").val("adnan@example.com");
+        });
+
+        // Reset all elements to their original content.
+        $("#reset").click(function () {
+          $("#textDemo").text("This is the original text.");
+
+          $("#htmlDemo").html("This is the original <b>HTML content</b>.");
+
+          $("#name").val("");
+          $("#email").val("");
+        });
+      });
+    </script>
+  </head>
+
+  <body>
+    <h1>jQuery Set Content Methods</h1>
+
+    <p>Click the buttons to change the content and values of HTML elements.</p>
+
+    <!-- text() Example -->
+    <div class="container">
+      <h2>1. text()</h2>
+
+      <p id="textDemo">This is the original text.</p>
+
+      <button id="setText">Set Text</button>
+    </div>
+
+    <!-- html() Example -->
+    <div class="container">
+      <h2>2. html()</h2>
+
+      <div id="htmlDemo">This is the original <b>HTML content</b>.</div>
+
+      <button id="setHtml">Set HTML</button>
+    </div>
+
+    <!-- val() Example -->
+    <div class="container">
+      <h2>3. val()</h2>
+
+      <label for="name">Name:</label><br />
+      <input type="text" id="name" placeholder="Enter your name" />
+      <br />
+
+      <label for="email">Email:</label><br />
+      <input type="email" id="email" placeholder="Enter your email" />
+      <br />
+
+      <button id="setVal">Set Values</button>
+    </div>
+
+    <!-- Combined Example -->
+    <div class="container">
+      <h2>4. Set All Content</h2>
+
+      <button id="setAll">Set All</button>
+
+      <button id="reset">Reset</button>
+    </div>
+  </body>
+</html>
