@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>jQuery Get Content</title>
+
+    <!-- CSS -->
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+      }
+
+      .container {
+        width: 400px;
+        padding: 15px;
+        border: 2px solid black;
+        margin-bottom: 20px;
+      }
+
+      input,
+      select {
+        padding: 8px;
+        margin: 8px 0;
+      }
+
+      button {
+        padding: 8px 12px;
+        margin: 5px;
+        cursor: pointer;
+      }
+
+      .output {
+        background-color: lightyellow;
+        padding: 10px;
+        margin-top: 10px;
+        border: 1px solid gray;
+        overflow-wrap: anywhere;
+      }
+    </style>
+
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
+
+    <!-- jQuery Code -->
+    <script>
+      $(document).ready(function () {
+        // text()
+        // Gets the text content of the selected element.
+        $("#getText").click(function () {
+          let content = $("#demo").text();
+
+          $("#textOutput").text(content);
+        });
+
+        // html()
+        // Gets the HTML content inside the selected element.
+        $("#getHtml").click(function () {
+          let content = $("#demo").html();
+
+          // Display the HTML as text so tags are visible.
+          $("#htmlOutput").text(content);
+        });
+
+        // val()
+        // Gets the current value of a form element.
+        $("#getVal").click(function () {
+          let name = $("#name").val();
+          let city = $("#city").val();
+
+          $("#valOutput").text("Name: " + name + " | City: " + city);
+        });
+      });
+    </script>
+  </head>
+
+  <body>
+    <h1>jQuery Get Content Methods</h1>
+
+    <!-- HTML Content -->
+    <div class="container">
+      <h2>1. text() and html()</h2>
+
+      <div id="demo">
+        Hello <strong>jQuery</strong>!
+        <p>This is a <em>paragraph</em>.</p>
+      </div>
+
+      <button id="getText">Get Text</button>
+
+      <button id="getHtml">Get HTML</button>
+
+      <h3>Output:</h3>
+
+      <p>text() Output:</p>
+      <div id="textOutput" class="output"></div>
+
+      <p>html() Output:</p>
+      <div id="htmlOutput" class="output"></div>
+    </div>
+
+    <!-- Form Content -->
+    <div class="container">
+      <h2>2. val()</h2>
+
+      <label for="name">Enter Name:</label><br />
+      <input type="text" id="name" value="Adnan" /><br />
+
+      <label for="city">Select City:</label><br />
+
+      <select id="city">
+        <option value="Indore">Indore</option>
+        <option value="Mumbai">Mumbai</option>
+        <option value="Pune">Pune</option>
+      </select>
+
+      <br />
+
+      <button id="getVal">Get Values</button>
+
+      <h3>Output:</h3>
+
+      <div id="valOutput" class="output"></div>
+    </div>
+  </body>
+</html>
