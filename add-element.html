@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>jQuery Add Elements</title>
+
+    <!-- CSS -->
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 500px;
+        padding: 15px;
+        border: 2px solid black;
+        margin: 20px 0;
+      }
+
+      #box {
+        padding: 15px;
+        border: 2px solid blue;
+        background-color: lightblue;
+        margin: 15px 0;
+      }
+
+      .item {
+        padding: 10px;
+        margin: 5px 0;
+        background-color: lightyellow;
+        border: 1px solid gray;
+      }
+
+      .new-item {
+        padding: 10px;
+        margin: 5px 0;
+        background-color: lightgreen;
+        border: 1px solid green;
+      }
+
+      button {
+        padding: 8px 12px;
+        margin: 5px;
+        cursor: pointer;
+      }
+    </style>
+
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
+
+    <!-- jQuery Code -->
+    <script>
+      $(document).ready(function () {
+        // append()
+        // Adds content at the end inside the selected element.
+        $("#append").click(function () {
+          $("#box").append('<div class="new-item">Appended Element</div>');
+        });
+
+        // prepend()
+        // Adds content at the beginning inside the selected element.
+        $("#prepend").click(function () {
+          $("#box").prepend('<div class="new-item">Prepended Element</div>');
+        });
+
+        // before()
+        // Adds content immediately before the selected element.
+        $("#before").click(function () {
+          $("#box").before('<div class="new-item">Element Before Box</div>');
+        });
+
+        // after()
+        // Adds content immediately after the selected element.
+        $("#after").click(function () {
+          $("#box").after('<div class="new-item">Element After Box</div>');
+        });
+
+        // Reset the original HTML structure.
+        $("#reset").click(function () {
+          $("#box").html(
+            '<div class="item">Original Item 1</div>' +
+              '<div class="item">Original Item 2</div>',
+          );
+
+          $(".new-item").remove();
+        });
+      });
+    </script>
+  </head>
+
+  <body>
+    <h1>jQuery Add Elements</h1>
+
+    <p>Click the buttons to add new elements using jQuery.</p>
+
+    <!-- Main Container -->
+    <div class="container">
+      <h2>Example Container</h2>
+
+      <div id="box">
+        <div class="item">Original Item 1</div>
+
+        <div class="item">Original Item 2</div>
+      </div>
+    </div>
+
+    <!-- Buttons -->
+    <h2>Methods</h2>
+
+    <button id="append">append()</button>
+
+    <button id="prepend">prepend()</button>
+
+    <button id="before">before()</button>
+
+    <button id="after">after()</button>
+
+    <button id="reset">Reset</button>
+  </body>
+</html>
