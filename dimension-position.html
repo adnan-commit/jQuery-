@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jQuery Dimensions and Positioning</title>
+
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f4f6f8;
+        padding: 30px;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: auto;
+        background: white;
+        padding: 25px;
+        border-radius: 10px;
+      }
+
+      h1,
+      h2 {
+        color: #27374d;
+      }
+
+      .demo-box {
+        width: 200px;
+        height: 100px;
+        padding: 20px;
+        border: 5px solid #27374d;
+        margin: 15px;
+        background: #dde6ed;
+        box-sizing: content-box;
+      }
+
+      .parent-box {
+        position: relative;
+        width: 400px;
+        height: 220px;
+        border: 2px solid #526d82;
+        margin: 20px 0;
+        background: #f8f9fa;
+      }
+
+      .position-box {
+        position: absolute;
+        top: 40px;
+        left: 60px;
+        width: 120px;
+        height: 60px;
+        background: #dde6ed;
+        border: 2px solid #27374d;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      button {
+        padding: 10px 14px;
+        margin: 5px 3px;
+        border: none;
+        border-radius: 5px;
+        background: #27374d;
+        color: white;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background: #526d82;
+      }
+
+      #output {
+        background: #f4f6f8;
+        padding: 15px;
+        border-radius: 5px;
+        line-height: 1.8;
+        overflow-wrap: anywhere;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>jQuery Dimensions and Positioning</h1>
+
+      <p>Explore element dimensions and positions using jQuery.</p>
+
+      <h2>1. Dimensions</h2>
+
+      <div id="demoBox" class="demo-box">Dimension Demo</div>
+
+      <button id="getDimensions">Get All Dimensions</button>
+      <button id="setDimensions">Set Width and Height</button>
+      <button id="resetDimensions">Reset Dimensions</button>
+
+      <h2>2. Positioning</h2>
+
+      <p>The inner box is positioned relative to the parent box.</p>
+
+      <div class="parent-box" id="parentBox">
+        Parent Box
+
+        <div class="position-box" id="positionBox">Inner Box</div>
+      </div>
+
+      <button id="getPosition">Get Position</button>
+      <button id="getOffset">Get Offset</button>
+
+      <h2>Output</h2>
+
+      <div id="output">Click a button to display the results.</div>
+    </div>
+
+    <script>
+      $(document).ready(function () {
+        // Get dimensions.
+        $("#getDimensions").click(function () {
+          const box = $("#demoBox");
+
+          const width = box.width();
+          const height = box.height();
+
+          const innerWidth = box.innerWidth();
+          const innerHeight = box.innerHeight();
+
+          const outerWidth = box.outerWidth();
+          const outerHeight = box.outerHeight();
+
+          const outerWidthWithMargin = box.outerWidth(true);
+          const outerHeightWithMargin = box.outerHeight(true);
+
+          $("#output").html(`
+                <strong>Dimensions:</strong><br>
+                width(): ${width}px<br>
+                height(): ${height}px<br>
+                innerWidth(): ${innerWidth}px<br>
+                innerHeight(): ${innerHeight}px<br>
+                outerWidth(): ${outerWidth}px<br>
+                outerHeight(): ${outerHeight}px<br>
+                outerWidth(true): ${outerWidthWithMargin}px<br>
+                outerHeight(true): ${outerHeightWithMargin}px
+            `);
+        });
+
+        // Set dimensions.
+        $("#setDimensions").click(function () {
+          $("#demoBox").width(250).height(120);
+        });
+
+        // Reset dimensions.
+        $("#resetDimensions").click(function () {
+          $("#demoBox").width(200).height(100);
+        });
+
+        // Get position relative to the offset parent.
+        $("#getPosition").click(function () {
+          const position = $("#positionBox").position();
+
+          $("#output").html(`
+                <strong>position():</strong><br>
+                Left: ${position.left}px<br>
+                Top: ${position.top}px
+            `);
+        });
+
+        // Get position relative to the document.
+        $("#getOffset").click(function () {
+          const offset = $("#positionBox").offset();
+
+          $("#output").html(`
+                <strong>offset():</strong><br>
+                Left: ${offset.left}px<br>
+                Top: ${offset.top}px
+            `);
+        });
+      });
+    </script>
+  </body>
+</html>

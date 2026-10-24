@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jQuery Events</title>
+
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f4f6f8;
+        padding: 30px;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: auto;
+        background: white;
+        padding: 25px;
+        border-radius: 10px;
+      }
+
+      h1,
+      h2 {
+        color: #27374d;
+      }
+
+      .demo-box {
+        background: #dde6ed;
+        border: 2px solid #27374d;
+        padding: 25px;
+        margin: 15px 0;
+        border-radius: 8px;
+        text-align: center;
+      }
+
+      button {
+        padding: 10px 14px;
+        margin: 5px 3px;
+        border: none;
+        border-radius: 5px;
+        background: #27374d;
+        color: white;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background: #526d82;
+      }
+
+      input {
+        padding: 10px;
+        width: 90%;
+        max-width: 350px;
+        margin: 8px 0;
+        border: 1px solid #526d82;
+        border-radius: 5px;
+      }
+
+      #output {
+        background: #f4f6f8;
+        padding: 15px;
+        min-height: 40px;
+        border-radius: 5px;
+        overflow-wrap: anywhere;
+      }
+
+      .highlight {
+        background: #fff3cd;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>jQuery Events</h1>
+
+      <p>Try the buttons, mouse actions, and input fields below.</p>
+
+      <!-- 1. Click event -->
+      <h2>1. Click Event</h2>
+
+      <button id="clickBtn">Click Me</button>
+
+      <!-- 2. Double-click event -->
+      <h2>2. Double-Click Event</h2>
+
+      <button id="doubleClickBtn">Double-Click Me</button>
+
+      <!-- 3. Mouse events -->
+      <h2>3. Mouse Events</h2>
+
+      <div id="mouseBox" class="demo-box">Move the mouse over this box.</div>
+
+      <!-- 4. Keyboard events -->
+      <h2>4. Keyboard Events</h2>
+
+      <input type="text" id="keyboardInput" placeholder="Type something here" />
+
+      <!-- 5. Input and change events -->
+      <h2>5. Input and Change Events</h2>
+
+      <input
+        type="text"
+        id="liveInput"
+        placeholder="Type to trigger the input event"
+      />
+
+      <p id="liveOutput">Live input will appear here.</p>
+
+      <select id="citySelect">
+        <option value="">Select a city</option>
+        <option value="Indore">Indore</option>
+        <option value="Mumbai">Mumbai</option>
+        <option value="Pune">Pune</option>
+      </select>
+
+      <!-- 6. Focus and blur -->
+      <h2>6. Focus and Blur Events</h2>
+
+      <input
+        type="text"
+        id="focusInput"
+        placeholder="Click here, then click elsewhere"
+      />
+
+      <!-- 7. Form submit -->
+      <h2>7. Form Submit Event</h2>
+
+      <form id="demoForm">
+        <input
+          type="text"
+          id="nameInput"
+          placeholder="Enter your name"
+          required
+        />
+
+        <br />
+
+        <button type="submit">Submit Form</button>
+      </form>
+
+      <!-- 8. on() and off() -->
+      <h2>8. on() and off()</h2>
+
+      <button id="onBtn">Attach Click Event</button>
+      <button id="offBtn">Remove Click Event</button>
+      <button id="eventTarget">Click Target</button>
+
+      <!-- Output -->
+      <h2>Event Output</h2>
+
+      <div id="output">Event messages will appear here.</div>
+    </div>
+
+    <script>
+      $(document).ready(function () {
+        // 1. click()
+        $("#clickBtn").click(function () {
+          $("#output").text("Button clicked!");
+        });
+
+        // 2. dblclick()
+        $("#doubleClickBtn").dblclick(function () {
+          $("#output").text("Button double-clicked!");
+        });
+
+        // 3. Mouse events
+        $("#mouseBox").mouseenter(function () {
+          $(this).addClass("highlight");
+          $("#output").text("Mouse entered the box.");
+        });
+
+        $("#mouseBox").mouseleave(function () {
+          $(this).removeClass("highlight");
+          $("#output").text("Mouse left the box.");
+        });
+
+        $("#mouseBox").mousedown(function () {
+          $("#output").text("Mouse button pressed down.");
+        });
+
+        $("#mouseBox").mouseup(function () {
+          $("#output").text("Mouse button released.");
+        });
+
+        // 4. Keyboard events
+        $("#keyboardInput").keydown(function (event) {
+          $("#output").text("Key pressed: " + event.key);
+        });
+
+        $("#keyboardInput").keyup(function (event) {
+          $("#output").text("Key released: " + event.key);
+        });
+
+        // 5. input() and change()
+        $("#liveInput").on("input", function () {
+          $("#liveOutput").text("You typed: " + $(this).val());
+        });
+
+        $("#citySelect").change(function () {
+          $("#output").text("Selected city: " + $(this).val());
+        });
+
+        // 6. focus() and blur()
+        $("#focusInput").focus(function () {
+          $("#output").text("Input field received focus.");
+        });
+
+        $("#focusInput").blur(function () {
+          $("#output").text("Input field lost focus.");
+        });
+
+        // 7. submit()
+        $("#demoForm").submit(function (event) {
+          event.preventDefault();
+
+          const name = $("#nameInput").val();
+
+          $("#output").text("Form submitted successfully! Hello, " + name);
+        });
+
+        // 8. on() and off()
+        function targetClickHandler() {
+          $("#output").text("Target button clicked!");
+        }
+
+        $("#onBtn").click(function () {
+          $("#eventTarget").on("click", targetClickHandler);
+
+          $("#output").text("Click event attached to target.");
+        });
+
+        $("#offBtn").click(function () {
+          $("#eventTarget").off("click", targetClickHandler);
+
+          $("#output").text("Click event removed from target.");
+        });
+      });
+    </script>
+  </body>
+</html>
