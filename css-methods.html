@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jQuery CSS Methods</title>
+
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f6f8;
+        padding: 30px;
+      }
+
+      .container {
+        max-width: 750px;
+        margin: auto;
+        background: white;
+        padding: 25px;
+        border-radius: 10px;
+      }
+
+      h1,
+      h2 {
+        color: #27374d;
+      }
+
+      .box {
+        border: 2px solid #27374d;
+        padding: 20px;
+        margin: 15px 0;
+        border-radius: 8px;
+        background-color: #dde6ed;
+      }
+
+      .highlight {
+        background-color: #fff3cd;
+        border-color: #e0a800;
+      }
+
+      .success {
+        color: #198754;
+        font-weight: bold;
+      }
+
+      .large-text {
+        font-size: 24px;
+      }
+
+      .rounded {
+        border-radius: 20px;
+      }
+
+      button {
+        padding: 10px 14px;
+        margin: 5px 3px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        background-color: #27374d;
+        color: white;
+      }
+
+      button:hover {
+        background-color: #526d82;
+      }
+
+      #output {
+        font-weight: bold;
+        color: #27374d;
+        margin-top: 15px;
+        overflow-wrap: anywhere;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>jQuery CSS Methods</h1>
+
+      <p>
+        Learn how to add, remove, toggle, and change CSS styles using jQuery.
+      </p>
+
+      <!-- Example 1: addClass() -->
+      <h2>1. addClass()</h2>
+
+      <div id="addBox" class="box">
+        This box will receive the highlight class.
+      </div>
+
+      <button id="addClassBtn">Add Highlight</button>
+
+      <hr />
+
+      <!-- Example 2: removeClass() -->
+      <h2>2. removeClass()</h2>
+
+      <div id="removeBox" class="box highlight">
+        This box initially has the highlight class.
+      </div>
+
+      <button id="removeClassBtn">Remove Highlight</button>
+
+      <hr />
+
+      <!-- Example 3: toggleClass() -->
+      <h2>3. toggleClass()</h2>
+
+      <div id="toggleBox" class="box">
+        Click the button to toggle the highlight class.
+      </div>
+
+      <button id="toggleClassBtn">Toggle Highlight</button>
+
+      <hr />
+
+      <!-- Example 4: css() -->
+      <h2>4. css()</h2>
+
+      <div id="cssBox" class="box">Change my CSS properties directly!</div>
+
+      <button id="changeColorBtn">Change Background</button>
+      <button id="changeFontBtn">Increase Font Size</button>
+      <button id="multipleCssBtn">Apply Multiple Styles</button>
+      <button id="resetCssBtn">Reset Styles</button>
+
+      <hr />
+
+      <!-- Example 5: Get CSS value -->
+      <h2>5. Get CSS Property</h2>
+
+      <button id="getCssBtn">Get Background Color</button>
+
+      <p id="output">The CSS value will appear here.</p>
+    </div>
+
+    <script>
+      $(document).ready(function () {
+        // 1. addClass(): adds a CSS class.
+        $("#addClassBtn").click(function () {
+          $("#addBox").addClass("highlight");
+        });
+
+        // 2. removeClass(): removes a CSS class.
+        $("#removeClassBtn").click(function () {
+          $("#removeBox").removeClass("highlight");
+        });
+
+        // 3. toggleClass(): adds or removes a class.
+        $("#toggleClassBtn").click(function () {
+          $("#toggleBox").toggleClass("highlight");
+        });
+
+        // 4a. css(): set one CSS property.
+        $("#changeColorBtn").click(function () {
+          $("#cssBox").css("background-color", "lightblue");
+        });
+
+        // 4b. css(): set another CSS property.
+        $("#changeFontBtn").click(function () {
+          $("#cssBox").css("font-size", "24px");
+        });
+
+        // 4c. css(): set multiple CSS properties.
+        $("#multipleCssBtn").click(function () {
+          $("#cssBox").css({
+            "background-color": "#d1e7dd",
+            color: "#146c43",
+            "font-size": "20px",
+            "border-radius": "20px",
+          });
+        });
+
+        // Reset the inline styles applied by css().
+        $("#resetCssBtn").click(function () {
+          $("#cssBox").removeAttr("style");
+        });
+
+        // 5. css(): get the computed CSS property value.
+        $("#getCssBtn").click(function () {
+          const backgroundColor = $("#cssBox").css("background-color");
+
+          $("#output").text("Background color: " + backgroundColor);
+        });
+      });
+    </script>
+  </body>
+</html>
