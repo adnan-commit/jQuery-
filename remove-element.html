@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jQuery Remove Elements</title>
+
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f6f8;
+        padding: 30px;
+      }
+
+      .container {
+        max-width: 700px;
+        margin: auto;
+        background: white;
+        padding: 25px;
+        border-radius: 10px;
+      }
+
+      h1,
+      h2 {
+        color: #27374d;
+      }
+
+      .box {
+        border: 2px solid #27374d;
+        padding: 15px;
+        margin: 15px 0;
+        border-radius: 8px;
+        background: #dde6ed;
+      }
+
+      .item {
+        background: white;
+        border: 1px solid #526d82;
+        padding: 12px;
+        margin: 8px 0;
+        border-radius: 5px;
+      }
+
+      button {
+        padding: 10px 14px;
+        margin: 5px 3px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        background: #27374d;
+        color: white;
+      }
+
+      button:hover {
+        background: #526d82;
+      }
+
+      #status {
+        font-weight: bold;
+        color: #27374d;
+        margin-top: 15px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>jQuery Remove Elements</h1>
+
+      <p>Learn how to remove elements using jQuery.</p>
+
+      <h2>Example 1: remove()</h2>
+
+      <div id="removeBox" class="box">
+        <h3>Remove Box</h3>
+
+        <div class="item">Item 1</div>
+        <div class="item removeTarget">Item 2 — Remove Me</div>
+        <div class="item">Item 3</div>
+      </div>
+
+      <button id="removeBtn">Remove Item 2</button>
+      <button id="resetRemove">Reset</button>
+
+      <hr />
+
+      <h2>Example 2: empty()</h2>
+
+      <div id="emptyBox" class="box">
+        <h3>This heading will also be removed</h3>
+        <div class="item">Child Item 1</div>
+        <div class="item">Child Item 2</div>
+      </div>
+
+      <button id="emptyBtn">Empty Box</button>
+      <button id="resetEmpty">Reset</button>
+
+      <hr />
+
+      <h2>Example 3: detach()</h2>
+
+      <div id="detachBox" class="box">
+        <div id="detachItem" class="item">
+          Click this item before detaching it.
+        </div>
+      </div>
+
+      <button id="detachBtn">Detach Item</button>
+      <button id="reattachBtn">Reattach Item</button>
+
+      <p id="status">Click the item above to test its event handler.</p>
+    </div>
+
+    <script>
+      $(document).ready(function () {
+        // 1. remove(): removes the selected element and its children.
+        $("#removeBtn").click(function () {
+          $("#removeBox .removeTarget").remove();
+        });
+
+        // Reset the remove() example.
+        $("#resetRemove").click(function () {
+          $("#removeBox").html(`
+                <h3>Remove Box</h3>
+                <div class="item">Item 1</div>
+                <div class="item removeTarget">Item 2 — Remove Me</div>
+                <div class="item">Item 3</div>
+            `);
+        });
+
+        // 2. empty(): removes all child elements and text.
+        // The outer #emptyBox remains.
+        $("#emptyBtn").click(function () {
+          $("#emptyBox").empty();
+        });
+
+        // Restore the contents of #emptyBox.
+        $("#resetEmpty").click(function () {
+          $("#emptyBox").html(`
+                <h3>This heading will also be removed</h3>
+                <div class="item">Child Item 1</div>
+                <div class="item">Child Item 2</div>
+            `);
+        });
+
+        // 3. detach(): removes the element but preserves
+        // its jQuery data and event handlers.
+        const $item = $("#detachItem");
+
+        $item.on("click", function () {
+          $("#status").text("The item was clicked!");
+        });
+
+        let $detachedItem = null;
+
+        $("#detachBtn").click(function () {
+          $detachedItem = $("#detachItem").detach();
+
+          $("#status").text("Item detached. Its click handler is preserved.");
+        });
+
+        // Reinsert the detached element.
+        $("#reattachBtn").click(function () {
+          if ($detachedItem) {
+            $("#detachBox").append($detachedItem);
+            $("#status").text(
+              "Item reattached. Click it to test its event handler.",
+            );
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
