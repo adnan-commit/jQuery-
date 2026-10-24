@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jQuery DOM Traversing</title>
+
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f4f6f8;
+        padding: 30px;
+      }
+
+      .container {
+        max-width: 850px;
+        margin: auto;
+        padding: 25px;
+        background: white;
+        border-radius: 10px;
+      }
+
+      h1,
+      h2 {
+        color: #27374d;
+      }
+
+      .department {
+        padding: 20px;
+        border: 2px solid #27374d;
+        background: #dde6ed;
+        border-radius: 8px;
+      }
+
+      .team {
+        margin: 15px;
+        padding: 15px;
+        border: 2px solid #526d82;
+        border-radius: 8px;
+        background: white;
+      }
+
+      .employee {
+        padding: 10px;
+        margin: 8px 0;
+        border: 1px solid #9db2bf;
+        border-radius: 5px;
+        background: #f8f9fa;
+      }
+
+      .highlight {
+        background: #fff3cd !important;
+        border-color: #e0a800 !important;
+        font-weight: bold;
+      }
+
+      .selected {
+        background: #d1e7dd !important;
+        border-color: #198754 !important;
+      }
+
+      button {
+        padding: 10px 14px;
+        margin: 5px 3px;
+        border: none;
+        border-radius: 5px;
+        background: #27374d;
+        color: white;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background: #526d82;
+      }
+
+      #output {
+        padding: 15px;
+        background: #f4f6f8;
+        border-radius: 5px;
+        line-height: 1.8;
+        overflow-wrap: anywhere;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>jQuery DOM Traversing</h1>
+
+      <p>Select an operation to explore the DOM hierarchy.</p>
+
+      <!-- DOM hierarchy -->
+      <div id="department" class="department">
+        Department
+
+        <div id="frontend" class="team">
+          Frontend Team
+
+          <div class="employee">Employee 1</div>
+          <div id="employee2" class="employee">Employee 2</div>
+          <div class="employee">Employee 3</div>
+        </div>
+
+        <div id="backend" class="team">
+          Backend Team
+
+          <div class="employee">Employee 4</div>
+          <div class="employee">Employee 5</div>
+        </div>
+      </div>
+
+      <h2>Ancestor Methods</h2>
+
+      <button id="parentBtn">parent()</button>
+      <button id="parentsBtn">parents()</button>
+      <button id="parentsUntilBtn">parentsUntil()</button>
+      <button id="closestBtn">closest()</button>
+
+      <h2>Descendant Methods</h2>
+
+      <button id="childrenBtn">children()</button>
+      <button id="findBtn">find()</button>
+
+      <h2>Sibling Methods</h2>
+
+      <button id="siblingsBtn">siblings()</button>
+      <button id="nextBtn">next()</button>
+      <button id="nextAllBtn">nextAll()</button>
+      <button id="nextUntilBtn">nextUntil()</button>
+      <button id="prevBtn">prev()</button>
+      <button id="prevAllBtn">prevAll()</button>
+      <button id="prevUntilBtn">prevUntil()</button>
+
+      <h2>Output</h2>
+
+      <div id="output">Selected elements will be described here.</div>
+
+      <button id="resetBtn">Reset Highlights</button>
+    </div>
+
+    <script>
+      $(document).ready(function () {
+        // Clear old highlights.
+        function resetHighlights() {
+          $(".highlight, .selected").removeClass("highlight selected");
+        }
+
+        // Highlight matching elements and describe them.
+        function showResult(elements, methodName) {
+          resetHighlights();
+
+          elements.addClass("highlight");
+
+          $("#output").text(
+            methodName +
+              " selected " +
+              elements.length +
+              " element(s): " +
+              elements
+                .map(function () {
+                  return $(this)
+                    .clone()
+                    .children()
+                    .remove()
+                    .end()
+                    .text()
+                    .trim()
+                    .replace(/\s+/g, " ")
+                    .slice(0, 45);
+                })
+                .get()
+                .join(", "),
+          );
+        }
+
+        // Target element: Employee 2.
+        const target = $("#employee2");
+
+        // 1. Immediate parent.
+        $("#parentBtn").click(function () {
+          showResult(target.parent(), "parent()");
+        });
+
+        // 2. All ancestors.
+        $("#parentsBtn").click(function () {
+          showResult(target.parents(), "parents()");
+        });
+
+        // 3. Ancestors until #department.
+        $("#parentsUntilBtn").click(function () {
+          showResult(
+            target.parentsUntil("#department"),
+            "parentsUntil('#department')",
+          );
+        });
+
+        // 4. First matching ancestor or the element itself.
+        $("#closestBtn").click(function () {
+          showResult(target.closest(".team"), "closest('.team')");
+        });
+
+        // 5. Immediate children of #frontend.
+        $("#childrenBtn").click(function () {
+          showResult($("#frontend").children(), "children()");
+        });
+
+        // 6. All employee descendants of #department.
+        $("#findBtn").click(function () {
+          showResult($("#department").find(".employee"), "find('.employee')");
+        });
+
+        // 7. All siblings of Employee 2.
+        $("#siblingsBtn").click(function () {
+          showResult(target.siblings(), "siblings()");
+        });
+
+        // 8. Immediate next sibling.
+        $("#nextBtn").click(function () {
+          showResult(target.next(), "next()");
+        });
+
+        // 9. All following siblings.
+        $("#nextAllBtn").click(function () {
+          showResult(target.nextAll(), "nextAll()");
+        });
+
+        // 10. Following siblings until Employee 4.
+        // Employee 4 is in another team, so it is not a sibling.
+        // Use Employee 3 as the stopping sibling instead.
+        $("#nextUntilBtn").click(function () {
+          showResult(
+            target.nextUntil("#frontend .employee:last"),
+            "nextUntil('#frontend .employee:last')",
+          );
+        });
+
+        // 11. Immediate previous sibling.
+        $("#prevBtn").click(function () {
+          showResult(target.prev(), "prev()");
+        });
+
+        // 12. All preceding siblings.
+        $("#prevAllBtn").click(function () {
+          showResult(target.prevAll(), "prevAll()");
+        });
+
+        // 13. Previous siblings until Employee 1.
+        $("#prevUntilBtn").click(function () {
+          showResult(
+            target.prevUntil("#frontend .employee:first"),
+            "prevUntil('#frontend .employee:first')",
+          );
+        });
+
+        // Reset.
+        $("#resetBtn").click(function () {
+          resetHighlights();
+
+          $("#output").text("Highlights cleared. Select another operation.");
+        });
+      });
+    </script>
+  </body>
+</html>
